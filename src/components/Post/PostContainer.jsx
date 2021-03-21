@@ -2,14 +2,15 @@ import React from 'react'
 import Post from "./Post";
 import {setPost} from "../../reducers/postReducer";
 import {connect} from "react-redux";
-import * as axios from 'axios';
+import {serverApi} from '../../API/Api'
 
 class PostContainer extends React.Component {
 
     componentDidMount() {
-        axios.get(`http://reactwp/wp-json/wp/v2/posts/`)
-            .then(response => {
-                this.props.setPost(response.data)
+        serverApi.getPost()
+            .then(data => {
+                this.props.setPost(data)
+                console.log(data)
             });
         // console.log(this.props)
     }
