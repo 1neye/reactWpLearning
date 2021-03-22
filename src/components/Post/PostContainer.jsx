@@ -1,18 +1,18 @@
 import React from 'react'
 import Post from "./Post";
-import {setPost} from "../../reducers/postReducer";
+import {setPost, setPostThunkCreator} from "../../reducers/postReducer";
 import {connect} from "react-redux";
 import {serverApi} from '../../API/Api'
 
 class PostContainer extends React.Component {
 
     componentDidMount() {
-        serverApi.getPost()
-            .then(data => {
-                this.props.setPost(data)
-                console.log(data)
-            });
-        // console.log(this.props)
+        this.props.setPostThunkCreator(this.props.setPost)
+        // serverApi.getPost()
+        //     .then(data => {
+        //         this.props.setPost(data)
+        //         console.log(data)
+        //     });
     }
 
     render() {
@@ -29,7 +29,7 @@ const mapStateProps = (state) => {
 }
 
 const connectPost = connect(mapStateProps, {
-    setPost,
+    setPost, setPostThunkCreator
 })(PostContainer)
 
 export default connectPost
