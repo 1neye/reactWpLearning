@@ -1,9 +1,10 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 let Post = (props) => {
     console.log(props)
     return <div>
+        Posts here
         {props.post.map((m) => <div key={m.id}>
             <NavLink to={'/PostPage'}>
                 <h1>{m.title.rendered}</h1>

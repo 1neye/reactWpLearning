@@ -4,6 +4,7 @@ const SET_POST = 'SET_POST'
 
 let initState = {
     post: [],
+    isAuth: false,
 }
 
 let postReducer = (state = initState, action) => {

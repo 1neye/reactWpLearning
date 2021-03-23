@@ -3,10 +3,12 @@ import Post from "./Post";
 import {setPost, setPostThunkCreator} from "../../reducers/postReducer";
 import {connect} from "react-redux";
 import {serverApi} from '../../API/Api'
+import {Redirect} from "react-router-dom";
 
 class PostContainer extends React.Component {
 
     componentDidMount() {
+        console.log(this.props)
         this.props.setPostThunkCreator(this.props.setPost)
         // serverApi.getPost()
         //     .then(data => {
@@ -16,15 +18,19 @@ class PostContainer extends React.Component {
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return <>
-            <Post post = {this.props.post}/>
+            <Post post = {this.props.post}
+            // isAuth = {this.props.isAuth}
+            />
         </>
     }
 }
 
 const mapStateProps = (state) => {
     return {
-        post: state.postPage.post
+        post: state.postPage.post,
+        isAuth: state.postPage.isAuth
     }
 }
 
