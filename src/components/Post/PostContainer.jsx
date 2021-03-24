@@ -4,6 +4,8 @@ import {setPost, setPostThunkCreator} from "../../reducers/postReducer";
 import {connect} from "react-redux";
 import {serverApi} from '../../API/Api'
 import {Redirect} from "react-router-dom";
+import withAuthRedirect from '../Login/withAuthRedirect.jsx'
+import {compose} from "redux";
 
 class PostContainer extends React.Component {
 
@@ -18,7 +20,7 @@ class PostContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
+        // if (!this.props.isAuth) return <Redirect to={'/login'}/>
         return <>
             <Post post = {this.props.post}
             // isAuth = {this.props.isAuth}
@@ -27,6 +29,9 @@ class PostContainer extends React.Component {
     }
 }
 
+
+// let letWithAuthRedirect = withAuthRedirect(PostContainer)
+
 const mapStateProps = (state) => {
     return {
         post: state.postPage.post,
@@ -34,8 +39,14 @@ const mapStateProps = (state) => {
     }
 }
 
-const connectPost = connect(mapStateProps, {
-    setPost, setPostThunkCreator
-})(PostContainer)
 
-export default connectPost
+// const connectPost = connect(mapStateProps, {
+//     setPost, setPostThunkCreator
+// })(letWithAuthRedirect)
+
+ export default compose(
+     connect(mapStateProps, {
+         setPost, setPostThunkCreator
+     }),
+     withAuthRedirect
+ ) (PostContainer)

@@ -2,7 +2,6 @@ import React from 'react'
 import {NavLink, Redirect} from "react-router-dom";
 
 let Post = (props) => {
-    console.log(props)
     return <div>
         Posts here
         {props.post.map((m) => <div key={m.id}>
