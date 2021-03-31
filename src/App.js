@@ -9,6 +9,8 @@ import regions from './components/regions.xml'
 let App = (props) => {
     // const fs = require('fs')
     // const xml2js = require('xml2js')
+    console.log('aga commit dlya polucheniya roboty. Vozmite menya na rabotu')
+    c
     const parser = new xml2js.Parser()
 
     fs.readFile(regions , (err, data) => {
